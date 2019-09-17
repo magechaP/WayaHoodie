@@ -1,0 +1,56 @@
+{% block content %}
+<style>
+    .form {
+        margin-top: 70px;
+        margin-bottom: 20px;
+        -webkit-box-shadow: -1px 2px 10px -2px rgba(0, 0, 0, 0.75);
+        -moz-box-shadow: -1px 2px 10px -2px rgba(0, 0, 0, 0.75);
+        box-shadow: -1px 2px 10px -2px rgba(0, 0, 0, 0.75);
+        padding: 30px;
+    }
+</style>
+
+<body background="static/images/home.jpg">
+
+    <link href="https://fonts.googleapis.com/css?family=Luckiest+Guy|Merienda|Monoton|Ultra&display=swap"
+        rel="stylesheet">
+    <head>    
+    <title>Update</title>
+    {{form.media}}
+    {% load bootstrap3 %} {% load staticfiles %}
+    {% block styles %} {% bootstrap_css %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}"> {% endblock %}
+
+    </head>
+
+
+
+    <div style="background-color: black;top:0;width:100%" class="jumbotron">
+        <h1 class="text-center" style="color:white;font-family: 'Merienda', cursive;">Welcome to the Hood</h1>
+    </div>
+    <div class="container" style="margin-top:20px;">
+        <div class="row">
+            <div class="col-md-3 col-xs-2"></div>
+            <div class="col-md-6 col-xs-8">
+
+                <h2 style="font-family: 'Merienda', cursive;" class="name">Setup your profile first</h2><br>
+                <div class="form">
+                    <form style="background-color: white;font-family: 'Merienda', cursive;"
+                        action="{% url 'setup_profile_hood' %}" method="post" enctype="multipart/form-data">
+
+                        {%csrf_token%}
+
+                        {% bootstrap_form form%}
+                        <input type="submit" class="btn " value="Submit">
+
+                    </form>
+                </div>
+                {% block scripts %}
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+                {% bootstrap_javascript %} {% endblock %}
+            </div>
+        </div>
+        <div class="col-md-3 col-xs-2"></div>
+    </div>
+</body>
+{% endblock %}
