@@ -1,0 +1,57 @@
+{%extends "registration/base.html"%}
+{% load bootstrap3 %}
+{% load bootstrap4 %}
+{% block content %}
+
+<style>
+    .form {
+        margin-top: 70px;
+        -webkit-box-shadow: -1px 2px 10px -2px rgba(0, 0, 0, 0.75);
+        -moz-box-shadow: -1px 2px 10px -2px rgba(0, 0, 0, 0.75);
+        box-shadow: -1px 2px 10px -2px rgba(0, 0, 0, 0.75);
+        padding: 30px
+    }
+</style>
+
+<body background="static/images/home.jpg">
+    <div style="background-color:black;top:0;width:100%" class="jumbotron">
+        <h1 class="text-center" style="color:white;font-family: 'Merienda', cursive;">Welcome to the Hood</h1>
+    </div>
+    <div class="container" style="margin-top:10px;margin-bottom:50px">
+        <div class="row">
+            <!-- Empty div -->
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+                {% if form.errors %}
+                <p> Some Information Might be Incorrect </p>
+                {% endif %}
+
+
+                <div class="form">
+
+
+
+                    <i>
+                        <form style="font-family: 'Merienda', cursive;" action="/accounts/register/" method="post">
+                            <h3 class="text-center"> <b>Sign up</b></h3>
+                            {% csrf_token %}
+                            {% bootstrap_form form %}
+                            <div class="form-group">
+                                <input type="submit" class="btn btn-primary btn-sm" value="Sign Up">
+                            </div>
+
+                            <input type="hidden" name="next" value="{{next}}">
+
+                        </form>
+
+                    </i>
+                    <p>Have an account. <a href="/accounts/login">Login</a></p>
+                </div>
+            </div>
+        </div>
+        <!-- empty div -->
+        <div class="col-md-2"></div>
+    </div>
+    </div>
+</body>
+{% endblock %}
