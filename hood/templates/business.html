@@ -1,0 +1,138 @@
+{%extends 'base.html'%}
+{% block content %}
+{{ block.super}}
+
+<head>
+    {{form.media}}
+    {% load bootstrap3 %} {% load staticfiles %}
+    {% block styles %} {% bootstrap_css %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}"> {% endblock %}
+    <link href="https://fonts.googleapis.com/css?family=Luckiest+Guy|Merienda|Monoton|Ultra&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <nav style="margin-top:135px;background-color: black" class="navbar navbar-inverse">
+        <ul>
+            <a href="{% url 'home' hood.id %}">
+                <li style="color:white;font-size:30px" class="glyphicon glyphicon-chevron-left">
+                    <p style="font-size:15px">back</p>
+                </li>
+            </a>
+        </ul>
+    </nav>
+    <div class="container" style="margin-top:10px">
+        <style>
+            body {
+                font-family: "Lato", sans-serif;
+            }
+
+            .sidenav {
+                height: 100%;
+                width: 50%;
+                position: fixed;
+                z-index: 1;
+                top: 150px;
+                bottom: 50PX;
+                left: 0;
+                margin-bottom: 200px;
+                background-color: white;
+                overflow-x: hidden;
+                transition: 0.5s;
+                padding-top: 60px;
+                padding-left: 10px;
+                font-family: 'Merienda', cursive;
+
+            }
+
+            .sidenav a {
+                padding: 8px 8px 8px 32px;
+                text-decoration: none;
+                font-size: 25px;
+                color: #0e0d0d;
+                display: block;
+                transition: 0.3s;
+            }
+
+            .sidenav a:hover {
+                color: #f1f1f1;
+            }
+
+            .sidenav .closebtn {
+                position: absolute;
+                top: 0;
+                right: 25px;
+                font-size: 36px;
+                margin-left: 50px;
+            }
+
+            @media screen and (max-height: 450px) {
+                .sidenav {
+                    padding-top: 15px;
+                }
+
+                .sidenav a {
+                    font-size: 18px;
+                }
+            }
+        </style>
+
+
+        <div id="mySidenav" class="sidenav">
+            <a href="javascript:void(0)" style="font-size:70px;" class="closebtn" onclick="closeNav()">&times;</a>
+            <h3>New Business</h3><br>
+            <form style="background-color: white;" action="{% url 'business' hood.id %}" method="post"
+                enctype="multipart/form-data">
+                {%csrf_token%}
+
+                {% bootstrap_form form%}
+                <input type="submit" class="btn btn-primary" value="Submit"
+                    style="border-radius:0px;width:100%;background-color:black;color:white;margin-bottom:50px">
+                <br><br><br><br><br><br><br>
+
+            </form>
+        </div>
+
+
+        <span style="font-size:50px;cursor:pointer" class="glyphicon glyphicon-edit" onclick="openNav()"> </span>
+        <p style="font-family: 'Merienda', cursive;">New Business</p>
+        <script>
+            function openNav() {
+                document.getElementById("mySidenav").style.width = "250px";
+            }
+
+            function closeNav() {
+                document.getElementById("mySidenav").style.width = "0";
+            }
+        </script>
+
+        {% block scripts %}
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        {% bootstrap_javascript %} {% endblock %}
+    </div>
+
+    <div class="col-md-3 col-sm-3"></div>
+    <div class="col-md-9">
+        {% for business in businesses %}
+        <div class=" post" style="font-family: 'Merienda', cursive;">
+
+            <div class="col-md-4">
+                <img style="" src="{{business.descriptive_image.url}}" class="img-responsive" alt="Image">
+            </div>
+            <div class="col-md-8">
+
+            </div>
+        </div>
+        <h3>{{business.business_name}}</h3>
+        <p>{{business.description}}</p>
+        <br><br>
+        <p> <img style="width:50px;height:50px;border-radius:100px" src="{{business.biz_user.profile.profile_pic.url}}"
+                class="img-responsive" alt='image'>
+            <b style="font-family: 'Merienda', cursive;">{{business.biz_user.username}}</b></p>
+        <p>contact me at <b> {{business.biz_user.email}} </b> or <b> {{business.biz_user.profile.contact}}</b></p>
+
+        {% endfor %}
+    </div>
+
+</body>
+{% endblock %}
