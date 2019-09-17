@@ -1,0 +1,42 @@
+<link href="https://fonts.googleapis.com/css?family=Luckiest+Guy|Monoton|Ultra&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Luckiest+Guy|Merienda|Monoton|Ultra&display=swap" rel="stylesheet">
+<nav style="background-color: black;padding: 10px" class="navbar navbar-default navbar-fixed-top">
+    <h3 style="color:white" class="text-center">{{hood.name}}</h3>
+    <div class="container-fluid">
+        <div class="navbar-header">
+
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav">
+                <li style="font-family: 'Merienda', cursive;font-size:20px"><a style="color:white"
+                        href="/">Dashboard</a></li>
+                <li style="font-family: 'Merienda', cursive;font-size:20px"><a style="color:white"
+                        href="/logout">logout</a></li>
+
+
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li style="font-size:17px;font-family: 'Merienda', cursive;"><a style="color:white"
+                        href="{% url 'profile' request.user.id %}"><img
+                            style="height:35px;width:35px;border-radius:100px"
+                            src="{{request.user.profile.profile_pic.url}}">
+                        {{request.user.username}}</a></li>
+
+                <li style="font-family: 'Merienda', cursive;font-size:20px"><a style="color:white"
+                        href="{% url 'left' %}">Leave hood</a></li>
+            </ul>
+
+
+
+        </div>
+
+    </div>
+
+</nav>
+<div style="margin-bottom:50px"></div>
