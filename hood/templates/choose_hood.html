@@ -1,0 +1,66 @@
+{% block content %}
+<style>
+    .form {
+        -webkit-box-shadow: -1px 2px 49px 10px rgba(0, 0, 0, 0.75);
+        -moz-box-shadow: -1px 2px 49px 10px rgba(0, 0, 0, 0.75);
+        box-shadow: -1px 2px 49px 10px rgba(0, 0, 0, 0.75);
+        padding: 30px;
+        background-color: white;
+        width: 100%;
+        font-family: 'Merienda', cursive;
+        color: black;
+        margin-bottom: 30px;
+        margin-top: 100px;
+    }
+</style>
+
+<body background="static/images/home.jpg">
+    <link href="https://fonts.googleapis.com/css?family=Luckiest+Guy|Merienda|Monoton|Ultra&display=swap"
+        rel="stylesheet">
+    <title>Update</title>
+    {{form.media}}
+    {% load bootstrap3 %} {% load staticfiles %}
+    {% block styles %} {% bootstrap_css %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}"> {% endblock %}
+
+    </head>
+
+    <body style="background-color: white">
+        <div style="background-color: black;top:0;width:100%" class="jumbotron">
+            <h1 class="text-center" style="color:white;font-family: 'Merienda', cursive;">Welcome to the Hood</h1>
+        </div>
+        <div class="container" style="margin-top:10px;">
+            <div class="row">
+                <div class="col-md-2 col-xs-2"></div>
+                <div class="col-md-8 col-xs-8">
+
+
+                    <div class="form">
+                        <h1 style="font-family: 'Merienda', cursive;" class="text-center">Choose an option</h1><br>
+                        <h3 class="text-center">(a) select a hood</h3><br>
+                        {% if hoods %}
+                        {% for hood in hoods %}
+                        <a style="text-decoration:none" href="{% url 'setup_profile' hood.id %}">
+                            <h3 class="text-center"><b style="font-size:30px">٭</b> {{hood.name}}</h3>
+                        </a>
+                        <p style="color:black" class="text-center">{{hood.location}}</p>
+                        {% endfor %}
+                        {% else %}
+                        <h4 class="text-center">No hoods yet, create one</h4>
+
+                        {% endif %}<br><br>
+                        <h3 class="text-center">(b) create your hood</h3><br>
+                        <a href="{% url 'setup_hood' %}">
+                            <button class="btn btn-primary"
+                                style="width:100%;background-color: rgb(10, 10, 10);border:rgb(37, 54, 43);margin-bottom: 10px">Create
+                                hood</button></a>
+                    </div>
+                    {% block scripts %}
+                    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+                    {% bootstrap_javascript %} {% endblock %}
+                </div>
+            </div>
+            <div class="col-md-2 col-xs-2"></div>
+        </div>
+    </body>
+    {% endblock %}
