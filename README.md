@@ -5,6 +5,7 @@ interact with each other resulting into a friendly neighbourhood experience.
 ###### Author
 WayaHoodie
 ###### Published
+The application is published at the heroku site, https://wayanghoodie.herokuapp.com/
 * 18/9/2019
 
 ### Application Functionality
